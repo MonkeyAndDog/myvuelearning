@@ -16,8 +16,55 @@
 			</span>
 		</div>
 		
+		<div id="app-3">
+			<p v-if="seen">现在你看到我了</p>
+		</div>
+		
+		<div id="app-4">
+			<ol>
+				<li v-for="todo in todos">
+					{{todo.text}}
+				</li>
+			</ol>
+		</div>
+		<button onclick="addNewData()">添加新数据</button>
+		
+		<div id="app-5">
+			<p>{{ message }}</p>
+			<button v-on:click="reverseMessage">逆转消息</button>
+		</div>
+		
+		<div id="app-6">
+			<p>{{message}}</p>
+			<input v-model="message" />
+		</div>
+		
+		<div id="app-7">
+			<ol>
+				<todo-item 
+					v-for="item in groceryList"
+					v-bind:todo="item"
+					v-bind:key="item.id">
+				</todo-item>				
+			</ol>
+		</div>
+		
+		<!--<div id="myapp-1">
+			<ol>
+				<score-item 
+					v-for="item in scoreList"
+					v-bind:score="score.text"
+					></score-item>
+			</ol>
+		</div>-->
+		
 		<script type="text/javascript" src="js/vue.js" ></script>
 		
+		<!--
+        	作者：1466947023@qq.com
+        	时间：2018-02-10
+        	描述：教程上面的函数，学习使用
+        -->
 		<script>
 			var app = new Vue({
 				el:'#app',
@@ -32,6 +79,93 @@
 					message:'页面加载于' + new Date().toLocaleString()
 				}
 			})
+			
+			var app3= new Vue({
+				el:'#app-3',
+				data:{
+					seen:false
+				}
+			})
+			
+			var app4 = new Vue({
+				el:'#app-4',
+				data:{
+					todos:[
+					{text:'学习javascript'},
+					{text:'学习Vue'},
+					{text:'学习Java'}
+					]
+				}
+			})
+			
+			var app5 = new Vue({
+				el:'#app-5',
+				data:{
+					message:'Hello Vue.js!'
+				},
+				methods:{
+					reverseMessage:function () {
+						this.message = this.message.split(' ').reverse().join(' ')
+					}
+				}
+			})
+			
+			var app6 = new Vue({
+				el:'#app-6',
+				data:{
+					message:'Hello Vue!'
+				}
+			})
+			
+			Vue.component('todo-item', {
+				props:['todo'],
+				template:'<li>{{todo.text}}</li>'
+			})
+			var app7 = new Vue({
+				el:'#app-7',
+				data:{
+					groceryList:[
+					{id:0, text:'蔬菜'},
+					{id:1, text:'奶酪'},
+					{id:2, text:'随便什么其他人吃的东西'}
+					]
+				}
+			})
+			
+			Vue.component('score-item', {
+				props:['score'],
+				template:'<li>{{score.text}}</li>'
+			})
+//			var myapp1 = new Vue({
+//				el:'#myapp-1',
+//				data:{
+//					score:[
+//					{text:'99'},
+//					{text:'98'}
+//					]
+//				}
+//			})
+			
+			new Vue({
+				data:{
+					a:1
+				},
+				created:function () {
+					console.log('a is ' + this.a)
+				}
+			})
+			
+		</script>
+		
+		<!--
+        	作者：1466947023@qq.com
+        	时间：2018-02-10
+        	描述：自定义的函数，用来方便调试，实验
+        -->
+		<script>
+			function addNewData() {
+				app4.todos.push({text : '新项目'});
+			}
 		</script>
 	</body>
 </html>
