@@ -1,0 +1,58 @@
+<!--
+    Created By Hu
+ -->
+<!DOCTYPE html>
+<html lang="zh-ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue学习项目</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="components-demo">
+    <button-counter></button-counter>
+</div>
+<div id="components-demo2">
+    <blog-post v-for="post in posts" title="{{post.title}}"></blog-post>
+    <ul>
+        <li v-for="post in posts">{{ post.title }}</li>
+    </ul>
+</div>
+
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('button-counter', {
+        data:function() {
+            return {
+                count:0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    });
+    new Vue({
+        el:'#components-demo'
+    });
+
+    Vue.component('blog-post', {
+        props:['title'],
+        template:'<h3>{{ title }}</h3>'
+    });
+
+    new Vue({
+        el:'#components-demo2',
+        data:{
+            posts: [
+            {title:'bob'},
+            {title:'xiaoming'}
+        ]}
+    })
+</script>
+
+</body>
+</html>
