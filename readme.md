@@ -2,34 +2,29 @@
 ---
 >官方教程地址：https://cn.vuejs.org/v2/guide/index.html
 
+### 第一遍学习Vue.js
 1. 实例化Vue
-
-	```
+	```javascript
 	var vm = new Vue({
 		//选项
 	})
 	```
-
 2. 文本插值
-
 	```
 	<span>Message: {{ message }}</span>
-	
 	var app = new Vue({
-			el:'#app',
-			data:{
-				message:'hello vue!'
-			}
-		})
+        el:'#app',
+        data:{
+            message:'hello vue!'
+        }
+    })
 	```
-
 3. data的json数据定义
 	* 标准的json数据，
 	* 注意数组与非数组时的符号使用[],{}
 
 4. for循环
 	* 我们用 v-for 指令根据一组数组的选项列表进行渲染。v-for 指令需要使用 item in items 形式的特殊语法，items 是源数据数组并且 item 是数组元素迭代的别名。
-	
 		```
 		<ul id="example-1">
 		  <li v-for="item in items">
@@ -46,7 +41,6 @@
 		  }
 		})
 		```
-	
 	* 一个对象的v-for
 	
 		```
@@ -66,10 +60,15 @@
 		  }
 		})
 		```
+---
+### 第二遍学习Vue.js
+1. 计算属性 `Computed`
+
 
 ---
+
 # 谨以此纪念自己ajax mui servlet Tomcat json学习历程
->以下经验的生产环境：
+>以下经验的开发环境：
 >1. 框架：mui V3.7.0
 >2. 框架：ajax使用mui封装产品
 >3. 框架：Vue.js V2.5.13
@@ -81,14 +80,13 @@
 
 ---
 1. 关于跨域请求被拒绝
-	* 状况
+	* 浏览器报错：
 		```
 		XMLHttpRequest cannot load  *
 		Origin http://** is not allowed by Access-Control-Allow-Origin.
 		```
 	* 解决方法：
 		* 在Servlet拦截器中配置(自己写拦截器实现)
-		
 			```
 			public class CrosFilter implements Filter {
 				@Override
@@ -107,31 +105,25 @@
 			```
 		
 		* 在web.xml中配置使用拦截器
-	
-	```
-	<filter>
-   		<filter-name>cors</filter-name>
-		<filter-class>com.mrhu.struts.util.CrosFilter</filter-class>
-   	</filter>
-   	<filter-mapping>
-   		<filter-name>cors</filter-name>
-   		<url-pattern>/servlet/*</url-pattern>
-   	</filter-mapping>
-	```
-
+            ```
+            <filter>
+                <filter-name>cors</filter-name>
+                <filter-class>com.mrhu.struts.util.CrosFilter</filter-class>
+            </filter>
+            <filter-mapping>
+                <filter-name>cors</filter-name>
+                <url-pattern>/servlet/*</url-pattern>
+            </filter-mapping>
+            ```
 2. 请求约定
-	* MUI中不应该使用:
-	
-	>dataType:'json'<br>
-	因为服务器传过来的是一个字符串<br>
-	这时候也就需要在前端将字符串解析为json格式
-	
+	* MUI中不应该使用:`dataType:'json'`因为服务器传过来的是一个字符串这时候也就需要在前端将字符串解析为json格式
 	* Servlet中应该使用：
-	
-	>response.setContentType("text/json; charset=utf-8");
-	>response.setCharacterEncoding("utf-8");
-	
+        ```
+        response.setContentType("text/json; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+        ```
 ---	
 时间：2018-02-11 
+
 
 
